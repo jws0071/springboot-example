@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Main</title>
+<link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<input th:value="${ID}" id="name" type="text" > 회원ID
+		<button id="in"> 입실 </button> <button id="out"> 퇴실 </button> 
+    </div>
+    <form method = "post" action ="/login">
+        <input type = "submit" value = "관리자페이지"/>
+    </form>
+	<script src="/webjars/jquery/3.4.0/dist/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
