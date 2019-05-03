@@ -1,3 +1,3 @@
-insert into STUDY_TABLE values(1,'test'); 
-insert into STUDY_TABLE values(2,'테스트'); 
+insert into Basic_Model values(1,'test');
+insert into Basic_Model values(2,'테스트');
 

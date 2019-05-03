@@ -17,9 +17,10 @@ public class BasicModel {
     @Id
     @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    int id;
 
     @Column
-    private String name;
+    String name;
+
 
 }

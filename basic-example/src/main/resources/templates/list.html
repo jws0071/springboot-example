@@ -12,19 +12,28 @@
         <tr>
             <th> ID </th>
             <th> NAME </th>
+            <th> 비고 </th>
         </tr>
     </thead>
     <tbody>
-    <tr th:if="${lists.empty}">
+
+
+        <tr th:if="${lists.empty}">
             <td colspan="2"> No Books Available </td>
         </tr>
         <tr th:each="list : ${lists}">
-            <td><span th:text="${list.id}"> ID </span></td>
-            <td><span th:text="${list.name}"> NAME </span></td>
+                <td name="id1" th:value="${list.id}" th:text="${list.id}"></td>
+                <td th:text="${list.name}"></input></td>
+                <td>
+                    <a th:href="@{'/update/' + ${list.id}}">
+                        <span>UPDATE</span>
+                    </a>
+                </td>
         </tr>
+
     </tbody>
 </table>
-    <form method = "post" action ="/admin">
+    <form method = "post" action ="/home">
         <input type = "submit" value = "메인으로"/>
     </form>
 

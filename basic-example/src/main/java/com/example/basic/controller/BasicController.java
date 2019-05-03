@@ -29,19 +29,6 @@ public class BasicController {
     public String home(){
         return "home";
     }
-
-    //로그인 화면
-    @RequestMapping(value = "/login", method=RequestMethod.POST)
-    public String login(){
-        return "login";
-    }
-
-    //관리자화면
-    @RequestMapping(value = "/admin", method=RequestMethod.POST)
-    public String admin(){
-        return "admin";
-    }
-
     //사용자 List 화면
     @RequestMapping(value = "/list", method=RequestMethod.GET)
     public String list(Model model){
@@ -53,22 +40,23 @@ public class BasicController {
     }
 
 
-    //사용자 save 화면
-    @RequestMapping(value = "/save", method=RequestMethod.POST)
-    public String save(){
-        return "save";
-    }
 
-    //신규 회원 저장
-    @RequestMapping(value = "/insert_table", method=RequestMethod.POST)
-    public String insert_table(BasicModel basicModel, /*@RequestParam(value="id1",required=false)String id, */
-                               @RequestParam(value="name1",required=false)String name, Model model) {
+
+        //사용자 save 화면
+        @RequestMapping(value = "/save", method=RequestMethod.POST)
+        public String save(){
+            return "save";
+        }
+
+        //신규 회원 저장
+        @RequestMapping(value = "/insert_table", method=RequestMethod.POST)
+        public String insert_table(BasicModel basicModel, @RequestParam(value="name1",required=false)String name, Model model) {
         //System.out.println("id : "+ id);
         System.out.println("name : "+ name);
         //studyTable.setId(Integer.parseInt(id));
         basicModel.setName(name);
         basicService.insert_table(basicModel);
-        //System.out.println(studyTable);
+
 
         List<BasicModel> lists=basicService.getAllStudyTable();
         System.out.println(lists);
@@ -78,12 +66,14 @@ public class BasicController {
 
 
     //사용자 update 화면
-    @RequestMapping(value = "/update", method=RequestMethod.POST)
-    public String update(){
+    @RequestMapping(value = "/update/{id}", method=RequestMethod.POST)
+    public String update(Model model,@PathVariable String id ){
+        System.out.println(id);
+        basicService.getStudyTable(Integer.parseInt(id)).ifPresent(o -> model.addAttribute("get_data", o));
 
         return "update";
     }
-
+ /*
     //회원 변경 정보 저장
     @RequestMapping(value = "/update", method=RequestMethod.POST)
     public String update_table(BasicModel basicModel, @RequestParam(value="id1",required=false)String id,
@@ -106,7 +96,8 @@ public class BasicController {
     public String delete(){
         return "delete";
     }
-		/*
+*/
+/*
 		@RequestMapping(value = "/get/{id}", method=RequestMethod.GET)
 		public String get(Model model,@PathVariable Integer id) {
 			studyService.getStudyTable(id).ifPresent(o -> model.addAttribute("study", o));
@@ -127,8 +118,7 @@ public class BasicController {
 			studyService.delete(id);
 			return "redirect:/home/";
 		}
-		*/
-		/*
+
 		//http://localhost:8080/home/getall.do
 		@RequestMapping(value = "/getAll", method=RequestMethod.GET)
 		public String getAll(Model model){

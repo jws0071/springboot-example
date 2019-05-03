@@ -6,13 +6,16 @@
 <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
+
+
+<div th:each="get_datas : ${get_data}">
 	<form  method="post" action="/insert_table">
-		 <!--  <input  name="id1" type="text" th:value="${id2}" > 회원ID--> 
-		<input  name="name1" type="text"  th:value="${name2}"> 회원NAME
+		 <input  name="id1" type="text" th:text="${get_datas.id}" > 회원ID
+		<input  name="name1" type="text"  th:text="${get_datas.name}"> 회원NAME
 		<input type="submit" id="btn">
 	</form>
-	
-    <form method = "post" action ="/admin">
+</div>
+    <form method = "post" action ="/home">
         <input type = "submit" value = "메인으로"/>
     </form>
 

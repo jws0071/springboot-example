@@ -6,13 +6,19 @@
 <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
-	<div class="container">
-		<input th:value="${ID}" id="name" type="text" > 회원ID
-		<button id="in"> 입실 </button> <button id="out"> 퇴실 </button> 
-    </div>
-    <form method = "post" action ="/login">
-        <input type = "submit" value = "관리자페이지"/>
-    </form>
+
+	<form method = "get" action ="/list">
+		<input type = "submit" value = "사용자조회"/>
+	</form>
+	<form method = "post" action ="/save">
+		<input type = "submit" value = "사용자추가"/>
+	</form>
+	<form method = "post" action ="/update">
+		<input type = "submit" value = "사용자정보변경"/>
+	</form>
+	<form method = "post" action ="/delete">
+		<input type = "submit" value = "사용자삭제"/>
+	</form>
 	<script src="/webjars/jquery/3.4.0/dist/jquery.min.js"></script>
 	<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
