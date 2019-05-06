@@ -65,7 +65,7 @@ public class BasicController {
     }
 
 
-    //사용자 update 화면
+    //사용자 update 화면 이동시 특정값 호출
     @RequestMapping(value = "/update/{id}",  method={RequestMethod.GET,RequestMethod.POST})
     public String update(Model model,@PathVariable String id ){
         System.out.println(id);
