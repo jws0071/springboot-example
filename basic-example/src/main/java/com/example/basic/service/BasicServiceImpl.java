@@ -25,11 +25,6 @@ public class BasicServiceImpl implements BasicService {
         return basicRepository.save(e);
     }
 
-    @Override
-    public void delete(Integer id) {
-        basicRepository.deleteById(id);
-
-    }
 
     @Override
     public Optional<BasicModel> getStudyTable(Integer id) {
@@ -47,9 +42,15 @@ public class BasicServiceImpl implements BasicService {
     @Override
     public void update_table(BasicModel e) {
         basicRepository.update(e);
-
         return ;
     }
+
+    @Override
+    public void delete_table(BasicModel e) {
+        basicRepository.delete(e);
+
+    }
+
 
 
 }

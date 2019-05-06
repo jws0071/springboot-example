@@ -4,7 +4,7 @@ import java.util.Optional;
 import com.example.basic.model.BasicModel;
 
 public interface BasicService {
-    void delete(Integer id);
+
     Optional<BasicModel> getStudyTable(Integer id);
     List<BasicModel> getAllStudyTable();
 
@@ -12,5 +12,7 @@ public interface BasicService {
     BasicModel insert_table(BasicModel e);
     //테이블 업데이트
     void update_table(BasicModel e);
+
+    void delete_table(BasicModel e);
 
 }

@@ -12,7 +12,7 @@
         <tr>
             <th> ID </th>
             <th> NAME </th>
-            <th> 비고 </th>
+            <th> 사용자 정보 변경 </th>
         </tr>
     </thead>
     <tbody>
@@ -22,9 +22,9 @@
             <td colspan="2"> No Books Available </td>
         </tr>
         <tr th:each="list : ${lists}">
-                <td name="id1" th:value="${list.id}" th:text="${list.id}"></td>
-                <td th:text="${list.name}"></input></td>
-                <td>
+                <td name="id1" th:value="${list.id}" th:text="${list.id}" th:style="'width: 100px'"></td>
+                <td th:text="${list.name}" th:style="'width: 100px'"></input></td>
+                <td th:style="'width: 200px'">
                     <a th:href="@{'/update/' + ${list.id}}">
                         <span>UPDATE</span>
                     </a>
@@ -33,7 +33,7 @@
 
     </tbody>
 </table>
-    <form method = "post" action ="/home">
+    <form method = "post" action ="/">
         <input type = "submit" value = "메인으로"/>
     </form>
 

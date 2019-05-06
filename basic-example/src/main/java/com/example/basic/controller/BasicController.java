@@ -25,7 +25,7 @@ public class BasicController {
     //http://localhost:8080/home/get/1
 
     //메인 화면
-    @RequestMapping(value = "/", method=RequestMethod.GET)
+    @RequestMapping(value = "/", method={RequestMethod.GET,RequestMethod.POST})
     public String home(){
         return "home";
     }
@@ -66,13 +66,51 @@ public class BasicController {
 
 
     //사용자 update 화면
-    @RequestMapping(value = "/update/{id}", method=RequestMethod.POST)
+    @RequestMapping(value = "/update/{id}",  method={RequestMethod.GET,RequestMethod.POST})
     public String update(Model model,@PathVariable String id ){
         System.out.println(id);
         basicService.getStudyTable(Integer.parseInt(id)).ifPresent(o -> model.addAttribute("get_data", o));
 
         return "update";
     }
+    //사용자 update 저장
+    @RequestMapping(value = "/update_table", method=RequestMethod.POST)
+    public String update_table(BasicModel basicModel, @RequestParam(value="id1",required=false)String id,@RequestParam(value="name1",required=false)String name, Model model) {
+        System.out.println("id : "+ id);
+        System.out.println("name : "+ name);
+        basicModel.setId(Integer.parseInt(id));
+        basicModel.setName(name);
+        basicService.update_table(basicModel);
+        //System.out.println(studyTable);
+
+        List<BasicModel> lists=basicService.getAllStudyTable();
+        System.out.println(lists);
+        model.addAttribute("lists", lists);
+        return "list";
+    }
+
+    //사용자 delete 화면
+    @RequestMapping(value = "/delete", method=RequestMethod.POST)
+    public String delete(){
+        return "delete";
+    }
+
+    //사용자 delete 완료
+    @RequestMapping(value = "/delete_table", method=RequestMethod.POST)
+    public String delete(BasicModel basicModel, @RequestParam(value="name1",required=false)String name, Model model) {
+        System.out.println("name : "+ name);
+        basicModel.setName(name);
+        basicService.delete_table(basicModel);
+        //System.out.println(studyTable);
+
+        List<BasicModel> lists=basicService.getAllStudyTable();
+        System.out.println(lists);
+        model.addAttribute("lists", lists);
+        return "list";
+
+    }
+
+
  /*
     //회원 변경 정보 저장
     @RequestMapping(value = "/update", method=RequestMethod.POST)

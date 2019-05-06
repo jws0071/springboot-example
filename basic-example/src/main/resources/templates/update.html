@@ -9,9 +9,9 @@
 
 
 <div th:each="get_datas : ${get_data}">
-	<form  method="post" action="/insert_table">
-		 <input  name="id1" type="text" th:text="${get_datas.id}" > 회원ID
-		<input  name="name1" type="text"  th:text="${get_datas.name}"> 회원NAME
+	<form  method="post" action="/update_table">
+		<input  name="id1" type="text" th:value="${get_datas.id}" readonly> 회원ID
+		<input  name="name1" type="text"  th:value="${get_datas.name}"> 회원NAME
 		<input type="submit" id="btn">
 	</form>
 </div>
