@@ -1,34 +1,41 @@
 package com.example.basic.controller;
 import java.util.List;
 import java.util.Optional;
+
+import com.example.basic.repository.BasicRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.basic.model.BasicModel;
 import com.example.basic.service.BasicService;
 
 
 
-//http://millky.com/@origoni/post/1155
-//https://www.slideshare.net/topcredu/jpa-spring-data-jpa
+
 @Controller
 public class BasicController {
 
     @Autowired
     BasicService basicService;
+    BasicRepository basicRepository;
 
-    //http://localhost:8080/home/get/1
+    private static final Logger logger = LoggerFactory.getLogger(BasicController.class);
+
 
     //메인 화면
     @RequestMapping(value = "/", method={RequestMethod.GET,RequestMethod.POST})
-    public String home(){
+    public String home() {
         return "home";
     }
+    /*
     //사용자 List 화면
     @RequestMapping(value = "/list", method=RequestMethod.GET)
     public String list(Model model){
@@ -38,8 +45,15 @@ public class BasicController {
         model.addAttribute("lists", lists);
         return "list";
     }
+    */
+    // List - Paging 처리
+    @RequestMapping(value = "/list", method=RequestMethod.GET)
+    public String list(Model model, Pageable pageable){
+        Page<BasicModel> lists = basicRepository.findAll(pageable);
+        model.addAttribute("lists", lists);
 
-
+        return "list";
+    }
 
 
         //사용자 save 화면
