@@ -50,6 +50,7 @@ public class BasicController {
     @RequestMapping(value = "/list", method=RequestMethod.GET)
     public String list(Model model, Pageable pageable){
         Page<BasicModel> lists = basicRepository.findAll(pageable);
+        logger.debug("paging log" + pageable);
         model.addAttribute("lists", lists);
 
         return "list";
