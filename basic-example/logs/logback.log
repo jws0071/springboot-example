@@ -2161,3 +2161,10 @@ Caused by: org.springframework.expression.spel.SpelEvaluationException: EL1007E:
 [2019-05-17 16:17:07:25228][http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
 [2019-05-17 16:17:07:25229][http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{timestamp=Fri May 17 16:17:07 KST 2019, status=404, error=Not Found, message=No message available,  (truncated)...]
 [2019-05-17 16:17:07:25230][http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+[2019-05-17 16:21:15:4073][main] DEBUG o.s.web.context.ContextLoader - Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
+[2019-05-17 16:21:15:4074][main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 3223 ms
+[2019-05-17 16:21:16:5794][main] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/**/favicon.ico] in 'faviconHandlerMapping'
+[2019-05-17 16:21:16:5945][main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+[2019-05-17 16:21:17:6012][main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 11 mappings in 'requestMappingHandlerMapping'
+[2019-05-17 16:21:17:6027][main] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+[2019-05-17 16:21:17:6036][main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
