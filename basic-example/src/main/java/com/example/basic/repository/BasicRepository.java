@@ -1,8 +1,6 @@
 package com.example.basic.repository;
 import java.util.Optional;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -14,7 +12,6 @@ import javax.transaction.Transactional;
 
 public interface BasicRepository extends  JpaRepository<BasicModel, Integer> {
     Optional<BasicModel> findById(int id);
-    Page<BasicModel> findAll(Pageable pageable);
 
     @Transactional
     @Modifying	// update , delete Query시 @Modifying 어노테이션을 추가

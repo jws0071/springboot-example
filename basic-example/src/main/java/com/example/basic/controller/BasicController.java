@@ -1,6 +1,8 @@
 package com.example.basic.controller;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import com.example.basic.repository.BasicRepository;
 import org.slf4j.Logger;
@@ -9,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +30,8 @@ public class BasicController {
 
     @Autowired
     BasicService basicService;
+
+    @Autowired
     BasicRepository basicRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(BasicController.class);
@@ -35,27 +42,28 @@ public class BasicController {
     public String home() {
         return "home";
     }
-    /*
-    //사용자 List 화면
-    @RequestMapping(value = "/list", method=RequestMethod.GET)
-    public String list(Model model){
-        List<BasicModel> lists=basicService.getAllStudyTable();
-        //studyService.getStudyTable(id).ifPresent(o -> model.addAttribute("study", o));
-        System.out.println(lists);
-        model.addAttribute("lists", lists);
-        return "list";
-    }
-    */
+
+
+
+
+
     // List - Paging 처리
-    @RequestMapping(value = "/list", method=RequestMethod.GET)
-    public String list(Model model, Pageable pageable){
-        Page<BasicModel> lists = basicRepository.findAll(pageable);
-        logger.debug("paging log" + pageable);
+    @RequestMapping(value = "/list")
+    public String list(Model model, @PageableDefault(sort = { "id" }, direction = Sort.Direction.ASC, size = 5) Pageable pageable){
+        Page<BasicModel> lists = basicService.getAllPageTable(pageable);
         model.addAttribute("lists", lists);
-
+        System.out.println("paging test");
         return "list";
     }
 
+    // List - Paging 처리
+    @RequestMapping(value = "/list_2")
+    public String list_2(Model model, @PageableDefault(sort = { "id" }, direction = Sort.Direction.ASC, size = 5) Pageable pageable){
+        Page<BasicModel> lists = basicService.getAllPageTable(pageable);
+        model.addAttribute("lists", lists);
+        System.out.println("paging test");
+        return "list_2";
+    }
 
         //사용자 save 화면
         @RequestMapping(value = "/save", method=RequestMethod.POST)
@@ -125,7 +133,17 @@ public class BasicController {
 
     }
 
-
+/*
+    //사용자 List 화면
+    @RequestMapping(value = "/list", method=RequestMethod.GET)
+    public String list(Model model){
+        List<BasicModel> lists=basicService.getAllStudyTable();
+        //studyService.getStudyTable(id).ifPresent(o -> model.addAttribute("study", o));
+        System.out.println(lists);
+        model.addAttribute("lists", lists);
+        return "list";
+    }
+    */
  /*
     //회원 변경 정보 저장
     @RequestMapping(value = "/update", method=RequestMethod.POST)

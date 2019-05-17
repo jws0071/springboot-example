@@ -15,8 +15,7 @@ import lombok.Setter;
 public class BasicModel {
 
     @Id
-    @Column(name="id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     int id;
 
     @Column
