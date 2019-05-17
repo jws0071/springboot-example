@@ -19,4 +19,6 @@ public interface BasicService {
     void delete_table(BasicModel e);
 
 
+
+
 }

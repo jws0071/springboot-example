@@ -4,7 +4,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import com.example.basic.model.DslModel;
 import com.example.basic.repository.BasicRepository;
+import com.example.basic.repository.DslRepositorySupport;
+import com.example.basic.service.DslService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +35,7 @@ public class BasicController {
     BasicService basicService;
 
     @Autowired
-    BasicRepository basicRepository;
+    DslService dslService;
 
     private static final Logger logger = LoggerFactory.getLogger(BasicController.class);
 
@@ -47,7 +50,7 @@ public class BasicController {
 
 
 
-    // List - Paging 처리
+    // List - JPA Paging 처리
     @RequestMapping(value = "/list")
     public String list(Model model, @PageableDefault(sort = { "id" }, direction = Sort.Direction.ASC, size = 5) Pageable pageable){
         Page<BasicModel> lists = basicService.getAllPageTable(pageable);
@@ -56,10 +59,10 @@ public class BasicController {
         return "list";
     }
 
-    // List - Paging 처리
+    // List_2 - QueryDSL Paging 처리
     @RequestMapping(value = "/list_2")
-    public String list_2(Model model, @PageableDefault(sort = { "id" }, direction = Sort.Direction.ASC, size = 5) Pageable pageable){
-        Page<BasicModel> lists = basicService.getAllPageTable(pageable);
+    public String list_2(Model model, @PageableDefault(size = 5)  Pageable pageable){
+        Page<DslModel >lists = dslService.getAllPageTable(pageable);
         model.addAttribute("lists", lists);
         System.out.println("paging test");
         return "list_2";

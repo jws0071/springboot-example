@@ -9,7 +9,7 @@ import javax.persistence.Id;
 
 import lombok.*;
 
-import javax.persistence.Entity;
+
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

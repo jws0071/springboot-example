@@ -11,7 +11,8 @@
     <thead>
         <tr>
             <th> ID </th>
-            <th> NAME </th>
+            <th> NAME </th>s
+            <th> address </th>
             <th> 사용자 정보 변경 </th>
         </tr>
     </thead>
@@ -24,6 +25,7 @@
         <tr th:each="list : ${lists}">
                 <td name="id1" th:value="${list.id}" th:text="${list.id}" th:style="'width: 100px'"></td>
                 <td th:text="${list.name}" th:style="'width: 100px'"></input></td>
+                <td th:text="${list.address}" th:style="'width: 100px'"></input></td>
                 <td th:style="'width: 200px'">
                     <a th:href="@{'/update/' + ${list.id}}">
                         <span>UPDATE</span>

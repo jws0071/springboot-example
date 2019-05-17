@@ -18,10 +18,9 @@ public class DslRepositorySupport extends QuerydslRepositorySupport {
         this.queryFactory = queryFactory;
     }
 
-    public List<DslModel> findByName(String name) {
+    public List<DslModel> findAll() {
         return queryFactory
                 .selectFrom(dslModel)
-                .where(dslModel.name.eq(name))
                 .fetch();
     }
 }
