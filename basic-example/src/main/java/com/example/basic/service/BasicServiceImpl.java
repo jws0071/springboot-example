@@ -21,43 +21,44 @@ public class BasicServiceImpl implements BasicService {
     BasicRepository basicRepository;
 
 
-    //테이블 저장
-    @Override
-    public BasicModel insert_table(BasicModel e) {
-        System.out.println(e);
-        return basicRepository.save(e);
-    }
-
-
     @Override
     public Optional<BasicModel> getStudyTable(Integer id) {
 
         return basicRepository.findById(id);
     }
 
+    //JPA 사용
     @Override
     public List<BasicModel> getAllStudyTable() {
 
-        System.out.println(basicRepository.findAll());
         return basicRepository.findAll();
+    }
+
+    //QueryDSL 사용
+    @Override
+    public Page<BasicModel> getAllPageTable(Pageable pageable){
+
+        return basicRepository.findAll(pageable);
+    }
+
+
+
+    @Override
+    public List<BasicModel>  insert_table(BasicModel e) {
+        basicRepository.save(e);
+        List<BasicModel> result = getAllStudyTable();
+        return result;
     }
 
     @Override
     public void update_table(BasicModel e) {
         basicRepository.update(e);
-        return ;
     }
 
     @Override
     public void delete_table(BasicModel e) {
         basicRepository.delete(e);
 
-    }
-
-    @Override
-    public Page<BasicModel> getAllPageTable(Pageable pageable){
-
-        return basicRepository.findAll(pageable);
     }
 
 }

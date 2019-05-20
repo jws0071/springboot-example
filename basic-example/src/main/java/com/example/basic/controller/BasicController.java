@@ -1,20 +1,14 @@
 package com.example.basic.controller;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import com.example.basic.model.DslModel;
-import com.example.basic.repository.BasicRepository;
-import com.example.basic.repository.DslRepositorySupport;
+
 import com.example.basic.service.DslService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -37,9 +31,6 @@ public class BasicController {
     @Autowired
     DslService dslService;
 
-    private static final Logger logger = LoggerFactory.getLogger(BasicController.class);
-
-
     //메인 화면
     @RequestMapping(value = "/", method={RequestMethod.GET,RequestMethod.POST})
     public String home() {
@@ -47,15 +38,11 @@ public class BasicController {
     }
 
 
-
-
-
     // List - JPA Paging 처리
     @RequestMapping(value = "/list")
     public String list(Model model, @PageableDefault(sort = { "id" }, direction = Sort.Direction.ASC, size = 5) Pageable pageable){
         Page<BasicModel> lists = basicService.getAllPageTable(pageable);
         model.addAttribute("lists", lists);
-        System.out.println("paging test");
         return "list";
     }
 
@@ -64,28 +51,20 @@ public class BasicController {
     public String list_2(Model model, @PageableDefault(size = 5)  Pageable pageable){
         Page<DslModel >lists = dslService.getAllPageTable(pageable);
         model.addAttribute("lists", lists);
-        System.out.println("paging test");
         return "list_2";
     }
 
         //사용자 save 화면
-        @RequestMapping(value = "/save", method=RequestMethod.POST)
-        public String save(){
-            return "save";
-        }
+    @RequestMapping(value = "/save", method=RequestMethod.POST)
+    public String save(){
+        return "save";
+    }
 
         //신규 회원 저장
-        @RequestMapping(value = "/insert_table", method=RequestMethod.POST)
+    @RequestMapping(value = "/insert_table", method=RequestMethod.POST)
         public String insert_table(BasicModel basicModel, @RequestParam(value="name1",required=false)String name, Model model) {
-        //System.out.println("id : "+ id);
-        System.out.println("name : "+ name);
-        //studyTable.setId(Integer.parseInt(id));
         basicModel.setName(name);
-        basicService.insert_table(basicModel);
-
-
-        List<BasicModel> lists=basicService.getAllStudyTable();
-        System.out.println(lists);
+        List<BasicModel> lists = basicService.insert_table(basicModel);
         model.addAttribute("lists", lists);
         return "list";
     }
@@ -102,8 +81,6 @@ public class BasicController {
     //사용자 update 저장
     @RequestMapping(value = "/update_table", method=RequestMethod.POST)
     public String update_table(BasicModel basicModel, @RequestParam(value="id1",required=false)String id,@RequestParam(value="name1",required=false)String name, Model model) {
-        System.out.println("id : "+ id);
-        System.out.println("name : "+ name);
         basicModel.setId(Integer.parseInt(id));
         basicModel.setName(name);
         basicService.update_table(basicModel);
@@ -124,13 +101,10 @@ public class BasicController {
     //사용자 delete 완료
     @RequestMapping(value = "/delete_table", method=RequestMethod.POST)
     public String delete(BasicModel basicModel, @RequestParam(value="name1",required=false)String name, Model model) {
-        System.out.println("name : "+ name);
         basicModel.setName(name);
         basicService.delete_table(basicModel);
-        //System.out.println(studyTable);
 
         List<BasicModel> lists=basicService.getAllStudyTable();
-        System.out.println(lists);
         model.addAttribute("lists", lists);
         return "list";
 

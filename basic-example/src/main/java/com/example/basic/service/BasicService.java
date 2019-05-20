@@ -11,14 +11,12 @@ public interface BasicService {
     Optional<BasicModel> getStudyTable(Integer id);
     List<BasicModel> getAllStudyTable();
     Page<BasicModel> getAllPageTable(Pageable pageable);
+
     //테이블 저장
-    BasicModel insert_table(BasicModel e);
+    List<BasicModel> insert_table(BasicModel e);
     //테이블 업데이트
     void update_table(BasicModel e);
 
     void delete_table(BasicModel e);
-
-
-
 
 }
