@@ -8,10 +8,11 @@ import org.springframework.data.domain.Pageable;
 
 public interface BasicService {
 
-    Optional<BasicModel> getStudyTable(Integer id);
+    Optional<BasicModel> getStudyTable(String id);
     List<BasicModel> getAllStudyTable();
     Page<BasicModel> getAllPageTable(Pageable pageable);
 
+    Page<BasicModel> getSearchPageTable(Integer flag, String search_info, Pageable pageable);
     //테이블 저장
     List<BasicModel> insert_table(BasicModel e);
     //테이블 업데이트

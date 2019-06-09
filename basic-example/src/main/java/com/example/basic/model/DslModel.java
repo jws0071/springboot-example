@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import lombok.*;
 
 
-
+@Setter
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity

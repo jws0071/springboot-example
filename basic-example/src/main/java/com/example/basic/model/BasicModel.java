@@ -17,7 +17,7 @@ public class BasicModel {
 
     @Id
     @GeneratedValue
-    int id;
+    String id;
 
     @Column
     String name;

@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface DslRepository extends JpaRepository<DslModel,Long> {
+public interface DslRepository {
     List<DslModel> findAllList();
     Page<DslModel> findAllPage(Pageable pageable);
 }

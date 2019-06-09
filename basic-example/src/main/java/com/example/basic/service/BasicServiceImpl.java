@@ -22,7 +22,7 @@ public class BasicServiceImpl implements BasicService {
 
 
     @Override
-    public Optional<BasicModel> getStudyTable(Integer id) {
+    public Optional<BasicModel> getStudyTable(String id) {
 
         return basicRepository.findById(id);
     }
@@ -34,7 +34,7 @@ public class BasicServiceImpl implements BasicService {
         return basicRepository.findAll();
     }
 
-    //QueryDSL 사용
+
     @Override
     public Page<BasicModel> getAllPageTable(Pageable pageable){
 
@@ -58,6 +58,21 @@ public class BasicServiceImpl implements BasicService {
     @Override
     public void delete_table(BasicModel e) {
         basicRepository.delete(e);
+
+    }
+
+    // Search 부분
+    @Override
+    public Page<BasicModel> getSearchPageTable(Integer flag, String search_info, Pageable pageable){
+        if( flag == 1 ){
+
+            return basicRepository.findById(search_info,pageable);
+        }else if( flag == 2 ){
+            return basicRepository.findByName(search_info,pageable);
+        }else{
+            return basicRepository.findByIdOrName(search_info,pageable);
+        }
+
 
     }
 

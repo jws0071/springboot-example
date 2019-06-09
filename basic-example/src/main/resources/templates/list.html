@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>List</title>
@@ -33,6 +33,20 @@
 
     </tbody>
 </table>
+<div>
+
+    <form th:action="@{/search}" th:object="${searchdata}" method="get">
+        <select th:field="*{flag}" >
+            <option th:value="1"> ID </option>
+            <option th:value="2"> NAME </option>
+            <option th:value="3"> ID+NAME </option>
+        </select>
+        <input th:field="*{search_info}" type="text"/>
+        <button type="submit">Search</button>
+    </form>
+
+
+</div>
 <div class="container">
     <div class="row">
         <ul th:fragment="pagination" class="pagination">

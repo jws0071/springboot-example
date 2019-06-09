@@ -14,7 +14,7 @@ import java.util.List;
 import static com.example.basic.model.QDslModel.dslModel;
 
 @Repository
-public class DslRepositorySupport extends QuerydslRepositorySupport {
+public class DslRepositorySupport extends QuerydslRepositorySupport implements DslRepository{
     private final JPAQueryFactory queryFactory;
 
     public DslRepositorySupport(JPAQueryFactory queryFactory) {
