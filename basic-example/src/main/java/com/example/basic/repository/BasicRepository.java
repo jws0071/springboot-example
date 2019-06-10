@@ -19,7 +19,9 @@ public interface BasicRepository extends  JpaRepository<BasicModel, String> {
     Optional<BasicModel> findById(String id);
     Page<BasicModel> findById(String id, Pageable pageable);
     Page<BasicModel> findByName(String name, Pageable pageable);
-    Page<BasicModel> findByIdOrName(String all,Pageable pageable);
+    //where절 조건이 두개이므로 조건이 두개로 들어가야함
+    Page<BasicModel> findByIdContainingOrNameContaining(String id_str,String name_str,Pageable pageable);
+
 
 
 

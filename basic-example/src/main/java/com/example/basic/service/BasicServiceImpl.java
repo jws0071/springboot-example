@@ -63,14 +63,14 @@ public class BasicServiceImpl implements BasicService {
 
     // Search 부분
     @Override
-    public Page<BasicModel> getSearchPageTable(Integer flag, String search_info, Pageable pageable){
-        if( flag == 1 ){
+    public Page<BasicModel> getSearchPageTable(String flag, String search_info, Pageable pageable){
+        if( flag.equals("1") ){
 
             return basicRepository.findById(search_info,pageable);
-        }else if( flag == 2 ){
+        }else if( flag.equals("2") ){
             return basicRepository.findByName(search_info,pageable);
         }else{
-            return basicRepository.findByIdOrName(search_info,pageable);
+            return basicRepository.findByIdContainingOrNameContaining(search_info,search_info,pageable);
         }
 
 

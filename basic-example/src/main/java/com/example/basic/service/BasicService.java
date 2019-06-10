@@ -12,7 +12,7 @@ public interface BasicService {
     List<BasicModel> getAllStudyTable();
     Page<BasicModel> getAllPageTable(Pageable pageable);
 
-    Page<BasicModel> getSearchPageTable(Integer flag, String search_info, Pageable pageable);
+    Page<BasicModel> getSearchPageTable(String flag, String search_info, Pageable pageable);
     //테이블 저장
     List<BasicModel> insert_table(BasicModel e);
     //테이블 업데이트

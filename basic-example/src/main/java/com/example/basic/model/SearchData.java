@@ -5,6 +5,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SearchData {
-    private String flag;
+    private String flag_info;
     private String search_info;
 }

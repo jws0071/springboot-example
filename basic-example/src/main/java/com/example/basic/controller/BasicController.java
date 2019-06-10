@@ -46,9 +46,10 @@ public class BasicController {
 
     // List - JPA Paging 처리
     @RequestMapping(value = "/list" )
-    public String list(Model model, @PageableDefault(sort = { "id" }, direction = Sort.Direction.ASC, size = 5) Pageable pageable){
+    public String list(Model model,@PageableDefault(sort = { "id" }, direction = Sort.Direction.ASC, size = 5) Pageable pageable){
         Page<BasicModel> lists = basicService.getAllPageTable(pageable);
         model.addAttribute("lists", lists);
+        model.addAttribute("searchdata", new SearchData());
         return "list";
     }
 
@@ -120,13 +121,16 @@ public class BasicController {
 
     }
     // List - JPA Paging 처리
-    @RequestMapping(value = "/search")
-    public String search(Model model,@ModelAttribute   @Valid SearchData searchdata, @PageableDefault(sort = { "id" }, direction = Sort.Direction.ASC, size = 5) Pageable pageable){
+    @RequestMapping(value = "/search",method=RequestMethod.POST)
+    public String search(Model model,@ModelAttribute SearchData searchdata, @PageableDefault(sort = { "id" }, direction = Sort.Direction.ASC, size = 5) Pageable pageable){
 
         //flag ID : 1 , Name : 2 , ID+NAME : 3
-        System.out.println("SearchData_flag = " + searchdata.getFlag() + " SearchData_info = " + searchdata.getSearch_info());
-        //Page<BasicModel> lists = basicService.getSearchPageTable(flag,search_info,pageable);
-        ///model.addAttribute("lists", lists);
+        System.out.println("SearchData_flag = " + searchdata.getFlag_info() + " SearchData_info = " +searchdata.getSearch_info());
+        String flag_info = searchdata.getFlag_info();
+        String search_info = searchdata.getSearch_info();
+        Page<BasicModel> lists = basicService.getSearchPageTable(flag_info,search_info,pageable);
+        model.addAttribute("lists", lists);
+        model.addAttribute("searchdata", new SearchData());
         return "list";
     }
 
