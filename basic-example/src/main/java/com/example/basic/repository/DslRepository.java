@@ -11,4 +11,5 @@ import java.util.List;
 public interface DslRepository {
     List<DslModel> findAllList();
     Page<DslModel> findAllPage(Pageable pageable);
+    Page<DslModel> SearchAllPage(String flag_info,String search_info,Pageable pageable);
 }

@@ -65,7 +65,6 @@ public class BasicServiceImpl implements BasicService {
     @Override
     public Page<BasicModel> getSearchPageTable(String flag, String search_info, Pageable pageable){
         if( flag.equals("1") ){
-
             return basicRepository.findById(search_info,pageable);
         }else if( flag.equals("2") ){
             return basicRepository.findByName(search_info,pageable);

@@ -55,7 +55,22 @@
     </div>
 </div>
 
-    <form method = "post" action ="/">
+<form  action="#" th:action="@{/search_2}" th:object="${searchdata}" method="post">
+
+    <select th:field="*{flag_info}" >
+        <option th:value="1"> ID </option>
+        <option th:value="2"> NAME </option>
+        <option th:value="3"> ADDRESS </option>
+        <!--<option th:value="4"> ID+NAME+ADDRESS </option>-->
+    </select>
+    <input th:field="*{search_info}" type="text"/>
+    <button type="submit">Search</button>
+</form>
+
+
+
+
+<form method = "post" action ="/">
         <input type = "submit" value = "메인으로"/>
     </form>
 

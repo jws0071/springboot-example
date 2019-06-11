@@ -53,8 +53,19 @@ public class BasicController {
         return "list";
     }
 
+    // List - JPA 검색기능
+    @RequestMapping(value = "/search",method=RequestMethod.POST)
+    public String search(Model model,@ModelAttribute SearchData searchdata, @PageableDefault(sort = { "id" }, direction = Sort.Direction.ASC, size = 5) Pageable pageable){
 
-
+        //flag ID : 1 , Name : 2 , ID+NAME : 3
+        System.out.println("SearchData_flag = " + searchdata.getFlag_info() + " SearchData_info = " +searchdata.getSearch_info());
+        String flag_info = searchdata.getFlag_info();
+        String search_info = searchdata.getSearch_info();
+        Page<BasicModel> lists = basicService.getSearchPageTable(flag_info,search_info,pageable);
+        model.addAttribute("lists", lists);
+        model.addAttribute("searchdata", new SearchData());
+        return "list";
+    }
 
     // List_2 - QueryDSL Paging 처리
     @RequestMapping(value = "/list_2")
@@ -62,10 +73,26 @@ public class BasicController {
         System.out.println("controller");
         Page<DslModel >lists = dslService.getAllPageTable(pageable);
         model.addAttribute("lists", lists);
+        model.addAttribute("searchdata", new SearchData());
         return "list_2";
     }
 
-        //사용자 save 화면
+    // List_2 - QueryDSL 검색기능
+    @RequestMapping(value = "/search_2",method=RequestMethod.POST)
+    public String search_2(Model model,@ModelAttribute SearchData searchdata, @PageableDefault(sort = { "id" }, direction = Sort.Direction.ASC, size = 5) Pageable pageable){
+
+        //flag ID : 1 , Name : 2 , ADDRESS : 3 ,  ID+NAME+ADDRESS : 4
+        System.out.println("SearchData_flag = " + searchdata.getFlag_info() + " SearchData_info = " +searchdata.getSearch_info());
+        String flag_info = searchdata.getFlag_info();
+        String search_info = searchdata.getSearch_info();
+        Page<DslModel> lists = dslService.getSearchPageTable_2(flag_info,search_info,pageable);
+        model.addAttribute("lists", lists);
+        model.addAttribute("searchdata", new SearchData());
+        return "list_2";
+    }
+
+
+    //사용자 save 화면
     @RequestMapping(value = "/save", method=RequestMethod.POST)
     public String save(){
         return "save";
@@ -120,19 +147,8 @@ public class BasicController {
         return "list";
 
     }
-    // List - JPA Paging 처리
-    @RequestMapping(value = "/search",method=RequestMethod.POST)
-    public String search(Model model,@ModelAttribute SearchData searchdata, @PageableDefault(sort = { "id" }, direction = Sort.Direction.ASC, size = 5) Pageable pageable){
 
-        //flag ID : 1 , Name : 2 , ID+NAME : 3
-        System.out.println("SearchData_flag = " + searchdata.getFlag_info() + " SearchData_info = " +searchdata.getSearch_info());
-        String flag_info = searchdata.getFlag_info();
-        String search_info = searchdata.getSearch_info();
-        Page<BasicModel> lists = basicService.getSearchPageTable(flag_info,search_info,pageable);
-        model.addAttribute("lists", lists);
-        model.addAttribute("searchdata", new SearchData());
-        return "list";
-    }
+
 
 
 }
