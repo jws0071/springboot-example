@@ -35,7 +35,7 @@
 </table>
 <div>
 
-    <form  action="#" th:action="@{/search}" th:object="${searchdata}" method="post">
+    <form  action="#" th:action="@{/search}" th:object="${searchdata}" method="get">
 
         <select th:field="*{flag_info}" >
             <option th:value="1"> ID </option>
@@ -53,16 +53,16 @@
         <ul th:fragment="pagination" class="pagination">
             <li th:class="${lists.number eq 0}?'disabled':''">
                 <a th:if="${lists.number eq 0}" href="javascript:void(0)" aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a>
-                <a th:unless="${lists.number eq 0}" th:href="@{__${#httpServletRequest.requestURI}__(page=${lists.number-1})}"  aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a>
+                <a th:unless="${lists.number eq 0}" th:href="@{__${#httpServletRequest.requestURI}__(flag_info=${searchdata.flag_info},search_info=${searchdata.search_info},page=${lists.number-1})}"  aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a>
             </li>
 
             <li th:each="no:${#numbers.sequence(0, lists.totalPages-1)}" th:class="${lists.number eq no}?'active':''">
-                <a th:href="@{__${#httpServletRequest.requestURI}__(page=${no})}" th:inline="text">[[${no+1}]]</a>
+                <a th:href="@{__${#httpServletRequest.requestURI}__(flag_info=${searchdata.flag_info},search_info=${searchdata.search_info},page=${no})}" th:inline="text">[[${no+1}]]</a>
             </li>
 
             <li th:class="${lists.number+1 ge lists.totalPages}?'disabled':''">
                 <a th:if="${lists.number+1 ge lists.totalPages}" href="javascript:void(0)"   aria-label='Next'><span aria-hidden='true'>&raquo;</span></a>
-                <a th:unless="${lists.number+1 ge lists.totalPages}" th:href="@{__${#httpServletRequest.requestURI}__(page=${lists.number+1})}"  aria-label='Next'><span aria-hidden='true'>&raquo;</span></a>
+                <a th:unless="${lists.number+1 ge lists.totalPages}" th:href="@{__${#httpServletRequest.requestURI}__(flag_info=${searchdata.flag_info},search_info=${searchdata.search_info},page=${lists.number+1})}"  aria-label='Next'><span aria-hidden='true'>&raquo;</span></a>
             </li>
         </ul>
     </div>

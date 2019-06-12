@@ -54,7 +54,7 @@ public class BasicController {
     }
 
     // List - JPA 검색기능
-    @RequestMapping(value = "/search",method=RequestMethod.POST)
+    @RequestMapping(value = "/search",method={RequestMethod.GET,RequestMethod.POST})
     public String search(Model model,@ModelAttribute SearchData searchdata, @PageableDefault(sort = { "id" }, direction = Sort.Direction.ASC, size = 5) Pageable pageable){
 
         //flag ID : 1 , Name : 2 , ID+NAME : 3
@@ -63,7 +63,7 @@ public class BasicController {
         String search_info = searchdata.getSearch_info();
         Page<BasicModel> lists = basicService.getSearchPageTable(flag_info,search_info,pageable);
         model.addAttribute("lists", lists);
-        model.addAttribute("searchdata", new SearchData());
+        model.addAttribute("searchdata", searchdata);
         return "list";
     }
 
@@ -78,7 +78,7 @@ public class BasicController {
     }
 
     // List_2 - QueryDSL 검색기능
-    @RequestMapping(value = "/search_2",method=RequestMethod.POST)
+    @RequestMapping(value = "/search_2",method={RequestMethod.GET,RequestMethod.POST})
     public String search_2(Model model,@ModelAttribute SearchData searchdata, @PageableDefault(sort = { "id" }, direction = Sort.Direction.ASC, size = 5) Pageable pageable){
 
         //flag ID : 1 , Name : 2 , ADDRESS : 3 ,  ID+NAME+ADDRESS : 4
@@ -87,7 +87,7 @@ public class BasicController {
         String search_info = searchdata.getSearch_info();
         Page<DslModel> lists = dslService.getSearchPageTable_2(flag_info,search_info,pageable);
         model.addAttribute("lists", lists);
-        model.addAttribute("searchdata", new SearchData());
+        model.addAttribute("searchdata", searchdata);
         return "list_2";
     }
 
