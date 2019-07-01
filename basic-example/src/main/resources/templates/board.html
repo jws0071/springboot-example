@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>게시판</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+
+
+<div th:each="get_datas : ${get_data}">
+    <p> 회원ID :</p> <span  name="id1" type="text" th:text="${get_datas.id}" >  </span>
+    <p> 회원NAME :</p> <span  name="name1" type="text"  th:text="${get_datas.name}"> </span>
+</div>
+<div>
+    <h4>댓글 작성</h4>
+    <textarea rows=10 cols=10 style="text-align:center;"></textarea>
+    <button id="save_re"> 저장 </button>
+</div>
+
+
+<form method = "post" action ="/home">
+    <input type = "submit" value = "메인으로"/>
+</form>
+
+<script src="/webjars/jquery/3.4.0/dist/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+
+
+</html>
+
+
+<script type="text/javascript">
+
+    $('#save_re').click(function () {
+        alert('Test1 버튼 클릭');
+    });
+</script>

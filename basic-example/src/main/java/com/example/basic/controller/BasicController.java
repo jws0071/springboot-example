@@ -148,7 +148,14 @@ public class BasicController {
 
     }
 
+    //게시판 메인 내용
+    @GetMapping(value = "/board/{id}"  )
+    public String board(Model model,@PathVariable String id ){
+        System.out.println(id);
+        basicService.getStudyTable(id).ifPresent(o -> model.addAttribute("get_data", o));
 
+        return "board";
+    }
 
 
 }
