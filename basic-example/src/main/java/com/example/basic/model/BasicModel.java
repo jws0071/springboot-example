@@ -1,17 +1,17 @@
 package com.example.basic.model;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
 
 @Setter
 @Getter
+@ToString
 @Entity
 public class BasicModel {
 
@@ -21,7 +21,4 @@ public class BasicModel {
 
     @Column
     String name;
-
-
-
 }

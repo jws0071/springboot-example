@@ -27,7 +27,7 @@ public class BasicServcieTest {
     @Test
     public void testgetStudyTable() {
         try {
-            int id = 1;
+            String id = "1";
             Optional<BasicModel> result = basicService.getStudyTable(id);
             System.out.println(result);
 
@@ -52,7 +52,7 @@ public class BasicServcieTest {
         try {
 
             BasicModel basicModel = new BasicModel();
-            int id = 3;
+            String id = "1";
             String name ="TEST";
             basicModel.setId(id);
             basicModel.setName(name);
@@ -72,7 +72,7 @@ public class BasicServcieTest {
     public void testupdate_table() {
         try {
             BasicModel basicModel = new BasicModel();
-            int id = 1;
+            String id = "1";
             String name ="TEST";
             Optional<BasicModel> result = basicService.getStudyTable(id);
             System.out.println(result);
@@ -93,7 +93,7 @@ public class BasicServcieTest {
     public void testdelete_table() {
         try {
             BasicModel basicModel = new BasicModel();
-            int id = 2;
+            String id = "1";
             String name = "홍길동";
             Optional<BasicModel> result = basicService.getStudyTable(id);
             System.out.println(result);
@@ -107,4 +107,13 @@ public class BasicServcieTest {
             Assert.assertNotNull("NULL",e.getMessage());
         }
     }
+
+
+    @Test
+    public void board_test() {
+        BasicModel model = basicService.getBoardTabel("1").orElse(new BasicModel());
+        System.out.println(model.toString());
+        Assert.assertEquals("1", model.getId());
+    }
+
 }

@@ -19,7 +19,7 @@ public class QBasicModel extends EntityPathBase<BasicModel> {
 
     public static final QBasicModel basicModel = new QBasicModel("basicModel");
 
-    public final NumberPath<Integer> id = createNumber("id", Integer.class);
+    public final StringPath id = createString("id");
 
     public final StringPath name = createString("name");
 

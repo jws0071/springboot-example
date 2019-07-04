@@ -20,4 +20,6 @@ public interface BasicService {
 
     void delete_table(BasicModel e);
 
+    Optional<BasicModel> getBoardTabel(String id);
+
 }

@@ -24,7 +24,6 @@ public interface BasicRepository extends  JpaRepository<BasicModel, String> {
 
 
 
-
     @Transactional
     @Modifying	// update , delete Query시 @Modifying 어노테이션을 추가
     @Query(value="update BASIC_MODEL T set T.name = :#{#e.name} WHERE T.id = :#{#e.id}", nativeQuery=true)

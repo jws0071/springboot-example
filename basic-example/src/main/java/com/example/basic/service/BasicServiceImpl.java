@@ -61,6 +61,8 @@ public class BasicServiceImpl implements BasicService {
 
     }
 
+
+
     // Search 부분
     @Override
     public Page<BasicModel> getSearchPageTable(String flag, String search_info, Pageable pageable){
@@ -74,5 +76,14 @@ public class BasicServiceImpl implements BasicService {
 
 
     }
+
+    // JOIN 된 테이블 호출하기
+    @Override
+    public Optional<BasicModel> getBoardTabel(String id) {
+
+        return basicRepository.findById(id);
+    }
+
+
 
 }

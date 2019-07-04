@@ -43,3 +43,5 @@ insert into DSL_MODEL values(22,'test10','test');
 insert into DSL_MODEL values(23,'test10','test');
 insert into DSL_MODEL values(24,'test10','test');
 insert into DSL_MODEL values(25,'test10','test');
+insert into Board_Model values(1,'board test',1);
+
