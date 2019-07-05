@@ -3,6 +3,8 @@ package com.example.basic.service;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import com.example.basic.model.BoardModel;
+import com.example.basic.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -19,6 +21,9 @@ public class BasicServiceImpl implements BasicService {
 
     @Autowired
     BasicRepository basicRepository;
+
+    @Autowired
+    BoardRepository boardRepository;
 
 
     @Override
@@ -79,11 +84,15 @@ public class BasicServiceImpl implements BasicService {
 
     // JOIN 된 테이블 호출하기
     @Override
-    public Optional<BasicModel> getBoardTabel(String id) {
+    public Optional<BoardModel> getBoardTabel(String id) {
 
-        return basicRepository.findById(id);
+        return boardRepository.findById(id);
     }
 
+    @Override
+    public Optional<BasicModel> getBasicBoardTabel(String id) {
+        return basicRepository.findById(id);
+    }
 
 
 }

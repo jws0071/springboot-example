@@ -1,6 +1,7 @@
 package com.example.basic.service;
 
 import com.example.basic.model.BasicModel;
+import com.example.basic.model.BoardModel;
 import com.example.basic.repository.BasicRepository;
 import com.example.basic.service.BasicService;
 
@@ -111,9 +112,17 @@ public class BasicServcieTest {
 
     @Test
     public void board_test() {
-        BasicModel model = basicService.getBoardTabel("1").orElse(new BasicModel());
+        BoardModel model = basicService.getBoardTabel("1").orElse(new BoardModel());
         System.out.println(model.toString());
-        Assert.assertEquals("1", model.getId());
+
+    }
+
+    @Test
+    public void basic_board_test() {
+        BasicModel model = basicService.getBasicBoardTabel("1").orElse(new BasicModel());
+
+        System.out.println(model.getBoardModel().toString());
+
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.basic.repository;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.basic.model.BoardModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,6 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.example.basic.model.BasicModel;
+import com.example.basic.model.BoardModel;
 
 import javax.transaction.Transactional;
 
@@ -21,6 +23,7 @@ public interface BasicRepository extends  JpaRepository<BasicModel, String> {
     Page<BasicModel> findByName(String name, Pageable pageable);
     //where절 조건이 두개이므로 조건이 두개로 들어가야함
     Page<BasicModel> findByIdContainingOrNameContaining(String id_str,String name_str,Pageable pageable);
+
 
 
 

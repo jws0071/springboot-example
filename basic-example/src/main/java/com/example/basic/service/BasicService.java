@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import com.example.basic.model.BasicModel;
+import com.example.basic.model.BoardModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -20,6 +21,9 @@ public interface BasicService {
 
     void delete_table(BasicModel e);
 
-    Optional<BasicModel> getBoardTabel(String id);
+    Optional<BoardModel> getBoardTabel(String id);
+
+    Optional<BasicModel> getBasicBoardTabel(String id);
+
 
 }
