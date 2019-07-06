@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import com.example.basic.model.BasicModel;
 import com.example.basic.model.BoardModel;
+import com.example.basic.model.CommentModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -23,7 +24,13 @@ public interface BasicService {
 
     Optional<BoardModel> getBoardTabel(String id);
 
-    Optional<BasicModel> getBasicBoardTabel(String id);
+    List<BoardModel> getBoard();
+    List<CommentModel> getComment();
+
+
+    List<CommentModel> postComment(String cText, int bId);
+    void deleteComment(int cId);
+    Optional<CommentModel> putComment(int id, String uText);
 
 
 }

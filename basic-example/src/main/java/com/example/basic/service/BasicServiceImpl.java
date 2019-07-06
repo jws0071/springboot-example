@@ -3,19 +3,22 @@ package com.example.basic.service;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import com.example.basic.model.BasicModel;
 import com.example.basic.model.BoardModel;
+import com.example.basic.model.CommentModel;
+import com.example.basic.repository.BasicRepository;
 import com.example.basic.repository.BoardRepository;
+import com.example.basic.repository.CmtRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
-import com.example.basic.model.BasicModel;
-import com.example.basic.repository.BasicRepository;
 
+
+@RequiredArgsConstructor
 @Service
 public class BasicServiceImpl implements BasicService {
 
@@ -24,6 +27,11 @@ public class BasicServiceImpl implements BasicService {
 
     @Autowired
     BoardRepository boardRepository;
+
+    @Autowired
+    CmtRepository cmtRepository;
+    private int id;
+    private String uText;
 
 
     @Override
@@ -90,8 +98,53 @@ public class BasicServiceImpl implements BasicService {
     }
 
     @Override
-    public Optional<BasicModel> getBasicBoardTabel(String id) {
-        return basicRepository.findById(id);
+    public List<BoardModel> getBoard() {
+        return boardRepository.findAll();
+    }
+
+    @Override
+    public List<CommentModel> getComment() {
+        return cmtRepository.findAll();
+    }
+
+    @Override
+    public List<CommentModel> postComment(String cText, int bId){
+        CommentModel commentModel = new CommentModel();
+        BoardModel boardModel = new BoardModel();
+
+        commentModel.setCText(cText);
+        boardModel.setBid(bId);
+
+        commentModel.setBoardModel(boardModel);
+        cmtRepository.save(commentModel);
+
+       return cmtRepository.findAll();
+    }
+
+    @Override
+    public void deleteComment(int cId) {
+        CommentModel commentModel = new CommentModel();
+        commentModel.setCid(cId);
+
+        cmtRepository.delete(commentModel);
+    }
+
+    @Override
+    public Optional<CommentModel> putComment(int id, String uText) {
+
+        /*
+        * findby로  값 호출해서 다시 세팅해서 저장
+        * */
+        Optional<CommentModel> result = cmtRepository.findByCid(id);
+        CommentModel e  = new CommentModel();
+        e.setCid(result.get().getCid());
+        e.setCText(uText);
+
+        BoardModel boardModel  = new BoardModel();
+        boardModel.setBid(result.get().getBoardModel().getBid());
+        e.setBoardModel(boardModel);
+        cmtRepository.save(e);
+        return cmtRepository.findByCid(id);
     }
 
 

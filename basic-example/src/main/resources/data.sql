@@ -1,23 +1,3 @@
-insert into Basic_Model values(1,'test1');
-insert into Basic_Model values(2,'홍길동1');
-insert into Basic_Model values(3,'test2');
-insert into Basic_Model values(4,'홍길동2');
-insert into Basic_Model values(5,'test3');
-insert into Basic_Model values(6,'test3');
-insert into Basic_Model values(7,'test4');
-insert into Basic_Model values(8,'test4');
-insert into Basic_Model values(9,'test5');
-insert into Basic_Model values(10,'test5');
-insert into Basic_Model values(11,'test6');
-insert into Basic_Model values(12,'test6');
-insert into Basic_Model values(13,'test7');
-insert into Basic_Model values(14,'test7');
-insert into Basic_Model values(15,'test8');
-insert into Basic_Model values(16,'test8');
-insert into Basic_Model values(17,'test9');
-insert into Basic_Model values(18,'test9');
-insert into Basic_Model values(19,'test10');
-insert into Basic_Model values(20,'test10');
 insert into DSL_MODEL values(1,'test1','test');
 insert into DSL_MODEL values(2,'홍길동1','test');
 insert into DSL_MODEL values(3,'test2','test');
@@ -43,5 +23,21 @@ insert into DSL_MODEL values(22,'test10','test');
 insert into DSL_MODEL values(23,'test10','test');
 insert into DSL_MODEL values(24,'test10','test');
 insert into DSL_MODEL values(25,'test10','test');
-insert into Board_Model values(1,'board test',1);
+insert into Basic_Model(name) values('test1');
+insert into Basic_Model(name) values('test2');
+insert into Basic_Model(name) values('test3');
+insert into Basic_Model(name) values('test4');
+insert into Basic_Model(name) values('test5');
+insert into Basic_Model(name) values('test6');
+insert into Basic_Model(name) values('test7');
+insert into Basic_Model(name) values('test8');
+insert into Basic_Model(name) values('test9');
+insert into Basic_Model(name) values('test10');
+insert into Board_Model(B_NAME,BASIC_MODEL_ID ) values('board test1',1);
+insert into Board_Model(B_NAME,BASIC_MODEL_ID ) values('board test2',2);
+insert into Comment_Model(C_Text,BOARD_MODEL_ID ) values('comment test1',1);
+insert into Comment_Model(C_Text,BOARD_MODEL_ID ) values('comment test2',1);
+insert into Comment_Model(C_Text,BOARD_MODEL_ID ) values('comment test3',2);
+
+
 

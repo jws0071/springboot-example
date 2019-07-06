@@ -1,13 +1,12 @@
 package com.example.basic.controller;
-import java.awt.*;
 import java.util.List;
+import java.util.Map;
 
+import com.example.basic.model.CommentModel;
 import com.example.basic.model.DslModel;
 
 import com.example.basic.model.SearchData;
 import com.example.basic.service.DslService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.domain.Page;
@@ -16,16 +15,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.basic.model.BasicModel;
 import com.example.basic.service.BasicService;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 
 
 @Controller
@@ -119,7 +112,7 @@ public class BasicController {
     //사용자 update 저장
     @RequestMapping(value = "/update_table", method=RequestMethod.POST)
     public String update_table(BasicModel basicModel, @RequestParam(value="id1",required=false)String id,@RequestParam(value="name1",required=false)String name, Model model) {
-        basicModel.setId(id);
+        //basicModel.setId(id);
         basicModel.setName(name);
         basicService.update_table(basicModel);
         //System.out.println(studyTable);
@@ -154,6 +147,52 @@ public class BasicController {
         System.out.println(id);
         basicService.getStudyTable(id).ifPresent(o -> model.addAttribute("get_data", o));
 
+        return "board";
+    }
+    //댓글 호출
+    @GetMapping(value = "/comment/{id}"  )
+    public String commentSelect(Model model,@PathVariable String id ){
+        System.out.println(id);
+        basicService.getStudyTable(id).ifPresent(o -> model.addAttribute("get_data", o));
+
+        return "board";
+    }
+    //댓글 호출
+    @GetMapping(value = "/commentAll"  )
+    public String commentSelectAll(Model model ){
+        List<CommentModel> result = basicService.getComment();
+        model.addAttribute("result", result);
+        for(int i =0;i<result.size();i++){
+            System.out.println(result.get(i).getCid());
+            System.out.println(result.get(i).getCText());
+            System.out.println(result.get(i).getBoardModel().getBid());
+            System.out.println(result.get(i).getBoardModel().getBName());
+        }
+        return "board";
+    }
+    //댓글 추가
+    @PostMapping(value = "/comment"  )
+    public String commentInsert(Model model,@RequestParam(value="cText",required=false)String cText,@RequestParam(value="bId",required=false)int bId){
+        List<CommentModel> result = basicService.postComment(cText,bId);
+        model.addAttribute("result", result);
+        return "board";
+    }
+    //댓글 업데이트
+    @PutMapping(value = "/comment"  )
+    public String commentUpdate(Model model,@RequestParam(value="cId",required=false)int cId,@RequestParam(value="cText",required=false)String cText){
+
+        basicService.putComment(cId,cText).ifPresent(o -> model.addAttribute("getCommentUp", o));
+
+        return "board";
+    }
+
+    //댓글 삭제
+    @DeleteMapping(value = "/comment"  )
+    public String commentDelete(Model model,@RequestParam(value="cId",required=false)int cId){
+
+        basicService.deleteComment(cId);
+
+        model.addAttribute("result","삭제완료");
         return "board";
     }
 

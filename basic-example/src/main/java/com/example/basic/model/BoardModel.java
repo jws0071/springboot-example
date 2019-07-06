@@ -7,26 +7,34 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Column;
-import javax.persistence.ManyToOne;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Getter
 @Setter
-@ToString
 @Entity
 public  class BoardModel{
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int bid;
 
     @Column
-    private String boardtext;
+    private String bName;
 
-    @ManyToOne
-    @JoinColumn(name = "BasicModel_id")
+
+    @OneToOne
+    @JoinColumn(name="BasicModel_id")
     private BasicModel basicModel;
+
+    @OneToMany(mappedBy="boardModel")
+    private List<CommentModel> commentModels = new ArrayList<CommentModel>();
+
+    public void addBasicModels(CommentModel commentModel) {
+        this.commentModels.add(commentModel);
+    }
+
+
 }
 
