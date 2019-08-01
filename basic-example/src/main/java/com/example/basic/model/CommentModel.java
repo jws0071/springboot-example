@@ -32,9 +32,4 @@ public class CommentModel {
         boardModel.getCommentModels().add(this);
 
     }
-
-
-
-
-
 }
